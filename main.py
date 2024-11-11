@@ -1,4 +1,12 @@
 def count_chars(text):
+    """Counts the frequency of each alphabetical character in a string.
+
+    Args:
+        text (str): The input text to count characters from.
+
+    Returns:
+        dict: A dictionary with characters as keys and their counts as values.
+    """
     count_table = {}
 
     for char in text:
@@ -8,10 +16,24 @@ def count_chars(text):
 
 
 def count_words(line):
+    """Counts the number of words in a line of text.
+
+    Args:
+        line (str): The input line to count words from.
+
+    Returns:
+        int: The number of words in the line.
+    """
     return len(line.split())
 
 
 def main():
+    """Generates a report on the frequency of each alphabetical character in a text file.
+
+    Reads the file located at "books/frankenstein.txt", counts the total number of words,
+    and counts the frequency of each alphabetical character in the text.
+    Prints a sorted report of the character frequencies in descending order.
+    """
     file_path = "books/frankenstein.txt"
     text = ""
     total_words = 0
