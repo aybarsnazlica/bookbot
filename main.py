@@ -1,30 +1,5 @@
-def count_chars(text):
-    """Counts the frequency of each alphabetical character in a string.
-
-    Args:
-        text (str): The input text to count characters from.
-
-    Returns:
-        dict: A dictionary with characters as keys and their counts as values.
-    """
-    count_table = {}
-
-    for char in text:
-        if char.isalpha():
-            count_table[char.lower()] = count_table.get(char.lower(), 0) + 1
-    return count_table
-
-
-def count_words(line):
-    """Counts the number of words in a line of text.
-
-    Args:
-        line (str): The input line to count words from.
-
-    Returns:
-        int: The number of words in the line.
-    """
-    return len(line.split())
+from stats import count_chars, count_words
+import sys
 
 
 def main():
@@ -34,7 +9,11 @@ def main():
     and counts the frequency of each alphabetical character in the text.
     Prints a sorted report of the character frequencies in descending order.
     """
-    file_path = "books/frankenstein.txt"
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    file_path = sys.argv[1]
     text = ""
     total_words = 0
 
@@ -45,15 +24,21 @@ def main():
             text += line
 
     count_table = count_chars(text)
-    count_table_sorted = dict(sorted(count_table.items(), key=lambda item: item[1], reverse=True))
+    count_table_sorted = dict(
+        sorted(count_table.items(), key=lambda item: item[1], reverse=True)
+    )
 
-    print(f"--- Begin report of {file_path} ---\n{total_words} words found in the document\n")
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {file_path}...")
+    print("----------- Word Count ----------")
+    print(f"Found {total_words} total words")
+    print("--------- Character Count -------")
 
     for key, value in count_table_sorted.items():
-        print(f"The '{key}' character was found {value} times")
+        print(f"{key}: {value}")
 
-    print("--- End report ---")
+    print("============= END ===============")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
